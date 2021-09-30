@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 
 	. "github.com/dave/jennifer/jen"
@@ -20,19 +21,103 @@ func Traverse(doc *html.Node) *Statement {
 		} else if node.Type == html.ElementNode && node.DataAtom.String() != "" {
 			el = Qual(pkg, goifyTag(node.DataAtom.String())).Call()
 			for _, attr := range node.Attr {
-				if strings.Contains(attr.Key, "-") {
-					parts := strings.Split(attr.Key, "-")
+				if attr.Key == "gutter" || attr.Key == "onload" {
+					continue
+				}
 
-					el.Dot(goifyTag(parts[0])).Call(Lit(goifyTag(strings.Join(parts[1:], "-"))), Lit(attr.Val))
+				var val interface{}
+				val = attr.Val
+
+				if val == "" {
+					val = true
+				}
+
+				key := formatKey(attr.Key)
+				if strings.Contains(key, "-") {
+					parts := strings.Split(key, "-")
+
+					key = formatKey(goifyTag(parts[0]))
+
+					el.Dot(key)
+					if val == "true" {
+						el.Call(Lit(strings.Join(parts[1:], "-")), Lit(true))
+					} else {
+						el.Call(Lit(strings.Join(parts[1:], "-")), Lit(val))
+					}
+
+					val = nil
 				} else {
-					el.Dot(goifyTag(attr.Key)).Call(Lit(attr.Val))
+					key = formatKey(goifyTag(attr.Key))
+
+					el.Dot(key)
+				}
+
+				if key == "TabIndex" {
+					v, err := strconv.Atoi(fmt.Sprintf("%v", val))
+					if err != nil {
+						panic(err)
+					}
+
+					el.Call(Lit(v))
+				} else if key == "Style" {
+					styleParts := strings.Split(fmt.Sprintf("%v", val), ":")
+
+					// style="" or invalid CSS
+					if val == true || len(styleParts) <= 1 || len(styleParts)%2 != 0 {
+						el.Call(Lit(""), Lit(""))
+					} else {
+						for i, key := range styleParts {
+							if i%2 == 0 {
+								if i == 0 {
+									el.Call(Lit(key), Lit(styleParts[i+1]))
+								} else {
+									el.Dot("Style").Call(Lit(key), Lit(styleParts[i+1]))
+								}
+							}
+						}
+					}
+				} else if key == "AutoComplete" {
+					if val == "off" {
+						el.Call(Lit(false))
+					} else {
+						el.Call(Lit(true))
+					}
+				} else if key == "Spellcheck" {
+					if val == "true" {
+						el.Call(Lit(true))
+					} else {
+						el.Call(Lit(false))
+					}
+				} else if key == "CrossOrigin" {
+					if val == true {
+						el.Call(Lit("true"))
+					} else {
+						el.Call(Lit("false"))
+					}
+				} else if key == "Class" {
+					if val == true {
+						el.Call(Lit(""))
+					} else {
+						el.Call(Lit(val))
+					}
+				} else if key == "Width" || key == "Height" {
+					v, err := strconv.Atoi(strings.Trim(fmt.Sprintf("%v", val), "px"))
+					if err != nil {
+						panic(err)
+					}
+
+					el.Call(Lit(v))
+				} else if val != nil {
+					el.Call(Lit(val))
 				}
 			}
 		}
 
 		children := []Code{}
 		for child := node.FirstChild; child != nil; child = child.NextSibling {
-			children = append(children, crawler(child))
+			if child.DataAtom.String() != "svg" {
+				children = append(children, crawler(child))
+			}
 		}
 
 		if len(children) > 0 {
@@ -47,6 +132,34 @@ func Traverse(doc *html.Node) *Statement {
 
 func goifyTag(tag string) string {
 	return strings.Join(strings.Fields(strings.Title(strings.ReplaceAll(tag, "-", " "))), "")
+}
+
+func formatKey(key string) string {
+	if key == "Id" {
+		return "ID"
+	}
+
+	if key == "Tabindex" {
+		return "TabIndex"
+	}
+
+	if key == "role" {
+		return "aria-role"
+	}
+
+	if key == "Data" {
+		return "DataSet"
+	}
+
+	if key == "Autocomplete" {
+		return "AutoComplete"
+	}
+
+	if key == "Crossorigin" {
+		return "CrossOrigin"
+	}
+
+	return key
 }
 
 func main() {
