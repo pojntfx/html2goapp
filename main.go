@@ -7,23 +7,33 @@ import (
 	"golang.org/x/net/html"
 )
 
-func Traverse(doc *html.Node) {
-	var crawler func(*html.Node)
-	crawler = func(node *html.Node) {
+func Traverse(doc *html.Node) string {
+	var crawler func(*html.Node) string
+	crawler = func(node *html.Node) string {
+		rv := ""
+		tag := ""
+
 		if node.Type == html.TextNode && strings.TrimSpace(node.Data) != "" {
-			fmt.Println("Text:", node.Data)
+			rv += node.Data
 		}
 
 		if node.Type == html.ElementNode {
-			fmt.Println("Element:", node.DataAtom.String(), node.Attr)
+			tag = node.DataAtom.String()
+			rv += "<" + tag + ">"
 		}
 
 		for child := node.FirstChild; child != nil; child = child.NextSibling {
-			crawler(child)
+			rv += crawler(child)
 		}
+
+		if tag == "" {
+			return rv
+		}
+
+		return rv + "</" + tag + ">"
 	}
 
-	crawler(doc)
+	return crawler(doc)
 }
 
 func main() {
@@ -32,7 +42,7 @@ func main() {
 		panic(err)
 	}
 
-	Traverse(root)
+	fmt.Println(Traverse(root))
 }
 
 const input = `<div class="asdf">
