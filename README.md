@@ -1,6 +1,6 @@
 # HTML to go-app Converter
 
-Web app to convert HTML markup to [go-app.dev](https://go-app.dev/)'s syntax.
+CLI and web app to convert HTML markup to [go-app.dev](https://go-app.dev/)'s syntax.
 
 ## Overview
 
