@@ -2,26 +2,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta httpequiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="text/html; charset=utf-8" httpequiv="Content-Type">
 <meta name="author" content>
 <meta name="description" content="Convert HTML markup to go-app.dev's syntax">
 <meta name="keywords" content>
 <meta name="theme-color" content="#2d2c2c">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
-<meta content="http://127.0.0.1:39659/" property="og:url">
+<meta content="http://127.0.0.1:43297/" property="og:url">
 <meta property="og:title" content>
-<meta content="Convert HTML markup to go-app.dev's syntax" property="og:description">
-<meta content="website" property="og:type">
+<meta property="og:description" content="Convert HTML markup to go-app.dev's syntax">
+<meta property="og:type" content="website">
 <meta property="og:image" content>
 <title>
 
 </title>
-<link type="image/png" href="https://storage.googleapis.com/murlok-github/icon-192.png" rel="icon">
+<link rel="icon" type="image/png" href="https://storage.googleapis.com/murlok-github/icon-192.png">
 <link rel="apple-touch-icon" href="https://storage.googleapis.com/murlok-github/icon-192.png">
-<link rel="manifest" href="/html2goapp/manifest.webmanifest">
+<link href="/html2goapp/manifest.webmanifest" rel="manifest">
 <link type="text/css" rel="stylesheet" href="/html2goapp/app.css">
 <script defer="true" src="/html2goapp/wasm_exec.js"></script>
-<script src="/html2goapp/app.js" defer="true"></script>
+<script defer="true" src="/html2goapp/app.js"></script>
 </head>
 <body>
 <div>
@@ -39,20 +39,47 @@ HTML to go-app Converter
 </h1>
 </header>
 <main>
-<section id="input">
-<textarea placeholder="Enter HTML here" value></textarea>
-</section>
-<section id="actions">
-<button>
+<section id="input-section">
+<form>
+<label for="html-input">
+HTML Input
+</label>
+<br>
+<textarea required="true" style="width:100%;resize:vertical;" rows="25" value id="html-input" placeholder="Enter HTML here"></textarea>
+<br>
+<label for="go-app-pkg-input">
+go-app Package
+</label>
+<br>
+<input id="go-app-pkg-input" required="true" value>
+<br>
+<label for="component-pkg-input">
+Component Package
+</label>
+<br>
+<input required="true" value id="component-pkg-input">
+<br>
+<label for="component-name-input">
+Component Name
+</label>
+<br>
+<input id="component-name-input" required="true" value>
+<br>
+<button type="submit">
 Convert
 </button>
+</form>
 </section>
-<section id="output">
-<textarea placeholder="go-app's syntax will be here" readonly="true" value></textarea>
+<section id="output-section">
+<label for="go-app-output">
+go-app Output
+</label>
+<br>
+<textarea id="go-app-output" placeholder="go-app's syntax will be here" readonly="true" style="width:100%;resize:vertical;" rows="25" value></textarea>
 </section>
 </main>
 <footer>
-<a href="https://github.com/pojntfx/html2goapp" target="_blank">
+<a target="_blank" href="https://github.com/pojntfx/html2goapp">
 © 2021 AGPL-3.0 Felicitas Pojtinger
 </a>
 </footer>
