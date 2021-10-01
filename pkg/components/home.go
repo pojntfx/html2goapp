@@ -25,37 +25,87 @@ func (c *Home) Render() app.UI {
 			app.H1().Text("HTML to go-app Converter"),
 		),
 		app.Main().Body(
-			app.Section().ID("input").Body(
-				app.Textarea().
-					Placeholder("Enter HTML here").
-					OnInput(func(ctx app.Context, e app.Event) {
-						c.input = ctx.JSSrc().Get("value").String()
-					}).
-					Text(c.input),
-			),
-			app.Section().ID("actions").Body(
-				app.Button().
-					Text("Convert").
-					OnClick(func(ctx app.Context, e app.Event) {
-						generated, err := converter.ConvertHTMLToComponent(
-							c.input,
-							c.goAppPkg,
-							c.pkg,
-							c.component,
-						)
-						if err != nil {
-							generated += err.Error()
+			app.Section().ID("input-section").Body(
+				app.Form().OnSubmit(func(ctx app.Context, e app.Event) {
+					e.PreventDefault()
 
-							log.Println("could not convert HTML to component:", err)
-						}
+					generated, err := converter.ConvertHTMLToComponent(
+						c.input,
+						c.goAppPkg,
+						c.pkg,
+						c.component,
+					)
+					if err != nil {
+						generated += err.Error()
 
-						c.output = generated
-					}),
+						log.Println("could not convert HTML to component:", err)
+					}
+
+					c.output = generated
+				}).Body(
+					app.Label().Text("HTML Input").For("html-input"),
+					app.Br(),
+					app.Textarea().
+						ID("html-input").
+						Placeholder("Enter HTML here").
+						Required(true).
+						OnInput(func(ctx app.Context, e app.Event) {
+							c.input = ctx.JSSrc().Get("value").String()
+						}).
+						Style("width", "100%").
+						Style("resize", "vertical").
+						Rows(25).
+						Text(c.input),
+
+					app.Br(),
+					app.Label().Text("go-app Package").For("go-app-pkg-input"),
+					app.Br(),
+					app.Input().
+						ID("go-app-pkg-input").
+						Required(true).
+						OnInput(func(ctx app.Context, e app.Event) {
+							c.goAppPkg = ctx.JSSrc().Get("value").String()
+						}).
+						Value(c.goAppPkg),
+
+					app.Br(),
+					app.Label().Text("Component Package").For("component-pkg-input"),
+					app.Br(),
+					app.Input().
+						ID("component-pkg-input").
+						Required(true).
+						OnInput(func(ctx app.Context, e app.Event) {
+							c.pkg = ctx.JSSrc().Get("value").String()
+						}).
+						Value(c.pkg),
+
+					app.Br(),
+					app.Label().Text("Component Name").For("component-name-input"),
+					app.Br(),
+					app.Input().
+						ID("component-name-input").
+						Required(true).
+						OnInput(func(ctx app.Context, e app.Event) {
+							c.component = ctx.JSSrc().Get("value").String()
+						}).
+						Value(c.component),
+
+					app.Br(),
+					app.Button().
+						Text("Convert").
+						Type("submit"),
+				),
 			),
-			app.Section().ID("output").Body(
+			app.Section().ID("output-section").Body(
+				app.Label().Text("go-app Output").For("go-app-output"),
+				app.Br(),
 				app.Textarea().
+					ID("go-app-output").
 					Placeholder("go-app's syntax will be here").
 					ReadOnly(true).
+					Style("width", "100%").
+					Style("resize", "vertical").
+					Rows(25).
 					Text(c.output),
 			),
 		),
