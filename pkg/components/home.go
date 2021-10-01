@@ -25,233 +25,267 @@ func (c *Home) Render() app.UI {
 			app.H1().Text("HTML to go-app Converter"),
 		),
 		app.Main().Body(
-			app.Form().
-				Class("pf-c-form").
-				OnSubmit(func(ctx app.Context, e app.Event) {
-					e.PreventDefault()
-
-					generated, err := converter.ConvertHTMLToComponent(
-						c.input,
-						c.goAppPkg,
-						c.pkg,
-						c.component,
-					)
-					if err != nil {
-						generated += err.Error()
-
-						log.Println("could not convert HTML to component:", err)
-					}
-
-					c.output = generated
-				}).
+			app.Div().
+				Class("pf-l-grid pf-m-gutter pf-m-all-6-col-on-xl").
 				Body(
 					app.Div().
-						Class("pf-c-form__group").
+						Class("pf-l-grid__item").
 						Body(
 							app.Div().
-								Class("pf-c-form__group-label").
-								Body(
-									app.Label().
-										Class("pf-c-form__label").
-										For("go-app-pkg-input").
-										Body(
-											app.Span().
-												Class("pf-c-form__label-text").
-												Text("go-App Package"),
-											app.Span().
-												Class("pf-c-form__label-required").
-												Aria("hidden", true).
-												Text("*"),
-										),
-								),
-							app.Div().
-								Class("pf-c-form__group-control").
-								Body(
-									app.Input().
-										Class("pf-c-form-control").
-										Required(true).
-										OnInput(func(ctx app.Context, e app.Event) {
-											c.goAppPkg = ctx.JSSrc().Get("value").String()
-										}).
-										Value(c.goAppPkg).
-										Type("text").
-										ID("go-app-pkg-input"),
-								),
-						),
-					app.Div().
-						Class("pf-c-form__group").
-						Body(
-							app.Div().
-								Class("pf-c-form__group-label").
-								Body(
-									app.Label().
-										Class("pf-c-form__label").
-										For("component-pkg-input").
-										Body(
-											app.Span().
-												Class("pf-c-form__label-text").
-												Text("Target Package"),
-											app.Span().
-												Class("pf-c-form__label-required").
-												Aria("hidden", true).
-												Text("*"),
-										),
-								),
-							app.Div().
-								Class("pf-c-form__group-control").
-								Body(
-									app.Input().
-										Class("pf-c-form-control").
-										Required(true).
-										OnInput(func(ctx app.Context, e app.Event) {
-											c.pkg = ctx.JSSrc().Get("value").String()
-										}).
-										Value(c.pkg).
-										Type("text").
-										ID("component-pkg-input"),
-								),
-						),
-					app.Div().
-						Class("pf-c-form__group").
-						Body(
-							app.Div().
-								Class("pf-c-form__group-label").
-								Body(
-									app.Label().
-										Class("pf-c-form__label").
-										For("component-name-input").
-										Body(
-											app.Span().
-												Class("pf-c-form__label-text").
-												Text("Component Name"),
-											app.Span().
-												Class("pf-c-form__label-required").
-												Aria("hidden", true).
-												Text("*"),
-										),
-								),
-							app.Div().
-								Class("pf-c-form__group-control").
-								Body(
-									app.Input().
-										Class("pf-c-form-control").
-										Type("text").
-										Required(true).
-										OnInput(func(ctx app.Context, e app.Event) {
-											c.component = ctx.JSSrc().Get("value").String()
-										}).
-										Value(c.component).
-										ID("component-name-input"),
-								),
-						),
-					app.Div().
-						Class("pf-c-form__group").
-						Body(
-							app.Div().
-								Class("pf-c-form__group-label").
-								Body(
-									app.Label().
-										Class("pf-c-form__label").
-										For("html-input").
-										Body(
-											app.Span().
-												Class("pf-c-form__label-text").
-												Text("Source Code"),
-											app.Span().
-												Class("pf-c-form__label-required").
-												Aria("hidden", true).
-												Text("*"),
-										),
-								),
-							app.Div().
-								Class("pf-c-form__group-control").
+								Class("pf-c-card").
 								Body(
 									app.Div().
-										Class("pf-c-code-editor").
+										Class("pf-c-card__title").
+										Text("Input"),
+									app.Div().
+										Class("pf-c-card__body").
 										Body(
-											app.Div().
-												Class("pf-c-code-editor__header").
+											app.Form().
+												Class("pf-c-form").
+												OnSubmit(func(ctx app.Context, e app.Event) {
+													e.PreventDefault()
+
+													generated, err := converter.ConvertHTMLToComponent(
+														c.input,
+														c.goAppPkg,
+														c.pkg,
+														c.component,
+													)
+													if err != nil {
+														generated += err.Error()
+
+														log.Println("could not convert HTML to component:", err)
+													}
+
+													c.output = generated
+												}).
 												Body(
 													app.Div().
-														Class("pf-c-code-editor__tab").
+														Class("pf-c-form__group").
 														Body(
-															app.Span().
-																Class("pf-c-code-editor__tab-icon").
+															app.Div().
+																Class("pf-c-form__group-label").
 																Body(
-																	app.I().Class("fas fa-code"),
+																	app.Label().
+																		Class("pf-c-form__label").
+																		For("go-app-pkg-input").
+																		Body(
+																			app.Span().
+																				Class("pf-c-form__label-text").
+																				Text("go-App Package"),
+																			app.Span().
+																				Class("pf-c-form__label-required").
+																				Aria("hidden", true).
+																				Text("*"),
+																		),
 																),
-															app.Span().
-																Class("pf-c-code-editor__tab-text").
-																Text("HTML"),
+															app.Div().
+																Class("pf-c-form__group-control").
+																Body(
+																	app.Input().
+																		Class("pf-c-form-control").
+																		Required(true).
+																		OnInput(func(ctx app.Context, e app.Event) {
+																			c.goAppPkg = ctx.JSSrc().Get("value").String()
+																		}).
+																		Value(c.goAppPkg).
+																		Type("text").
+																		ID("go-app-pkg-input"),
+																),
+														),
+													app.Div().
+														Class("pf-c-form__group").
+														Body(
+															app.Div().
+																Class("pf-c-form__group-label").
+																Body(
+																	app.Label().
+																		Class("pf-c-form__label").
+																		For("component-pkg-input").
+																		Body(
+																			app.Span().
+																				Class("pf-c-form__label-text").
+																				Text("Target Package"),
+																			app.Span().
+																				Class("pf-c-form__label-required").
+																				Aria("hidden", true).
+																				Text("*"),
+																		),
+																),
+															app.Div().
+																Class("pf-c-form__group-control").
+																Body(
+																	app.Input().
+																		Class("pf-c-form-control").
+																		Required(true).
+																		OnInput(func(ctx app.Context, e app.Event) {
+																			c.pkg = ctx.JSSrc().Get("value").String()
+																		}).
+																		Value(c.pkg).
+																		Type("text").
+																		ID("component-pkg-input"),
+																),
+														),
+													app.Div().
+														Class("pf-c-form__group").
+														Body(
+															app.Div().
+																Class("pf-c-form__group-label").
+																Body(
+																	app.Label().
+																		Class("pf-c-form__label").
+																		For("component-name-input").
+																		Body(
+																			app.Span().
+																				Class("pf-c-form__label-text").
+																				Text("Component Name"),
+																			app.Span().
+																				Class("pf-c-form__label-required").
+																				Aria("hidden", true).
+																				Text("*"),
+																		),
+																),
+															app.Div().
+																Class("pf-c-form__group-control").
+																Body(
+																	app.Input().
+																		Class("pf-c-form-control").
+																		Type("text").
+																		Required(true).
+																		OnInput(func(ctx app.Context, e app.Event) {
+																			c.component = ctx.JSSrc().Get("value").String()
+																		}).
+																		Value(c.component).
+																		ID("component-name-input"),
+																),
+														),
+													app.Div().
+														Class("pf-c-form__group").
+														Body(
+															app.Div().
+																Class("pf-c-form__group-label").
+																Body(
+																	app.Label().
+																		Class("pf-c-form__label").
+																		For("html-input").
+																		Body(
+																			app.Span().
+																				Class("pf-c-form__label-text").
+																				Text("Source Code"),
+																			app.Span().
+																				Class("pf-c-form__label-required").
+																				Aria("hidden", true).
+																				Text("*"),
+																		),
+																),
+															app.Div().
+																Class("pf-c-form__group-control").
+																Body(
+																	app.Div().
+																		Class("pf-c-code-editor").
+																		Body(
+																			app.Div().
+																				Class("pf-c-code-editor__header").
+																				Body(
+																					app.Div().
+																						Class("pf-c-code-editor__tab").
+																						Body(
+																							app.Span().
+																								Class("pf-c-code-editor__tab-icon").
+																								Body(
+																									app.I().Class("fas fa-code"),
+																								),
+																							app.Span().
+																								Class("pf-c-code-editor__tab-text").
+																								Text("HTML"),
+																						),
+																				),
+																			app.Div().
+																				Class("pf-c-code-editor__main").
+																				Body(
+																					app.Textarea().
+																						ID("html-input").
+																						Placeholder("Enter HTML input here").
+																						Required(true).
+																						OnInput(func(ctx app.Context, e app.Event) {
+																							c.input = ctx.JSSrc().Get("value").String()
+																						}).
+																						Style("width", "100%").
+																						Style("resize", "vertical").
+																						Style("border", "0").
+																						Class("pf-c-form-control").
+																						Rows(25).
+																						Text(c.input),
+																				),
+																		),
+																),
+														),
+													app.Div().
+														Class("pf-c-form__group").
+														Body(
+															app.Div().
+																Class("pf-c-form__group-control").
+																Body(
+																	app.Div().
+																		Class("pf-c-form__actions").
+																		Body(
+																			app.Button().
+																				Class("pf-c-button pf-m-primary").
+																				Type("submit").
+																				Text("Convert to Go"),
+																		),
+																),
 														),
 												),
+										),
+								),
+						),
+					app.Div().
+						Class("pf-l-grid__item").
+						Body(
+							app.Div().
+								Class("pf-c-card").
+								Body(
+									app.Div().
+										Class("pf-c-card__title").
+										Text("Output"),
+									app.Div().
+										Class("pf-c-card__body").
+										Body(
 											app.Div().
-												Class("pf-c-code-editor__main").
+												Class("pf-c-code-editor pf-m-read-only").
 												Body(
-													app.Textarea().
-														ID("html-input").
-														Placeholder("Enter HTML input here").
-														Required(true).
-														OnInput(func(ctx app.Context, e app.Event) {
-															c.input = ctx.JSSrc().Get("value").String()
-														}).
-														Style("width", "100%").
-														Style("resize", "vertical").
-														Style("border", "0").
-														Class("pf-c-form-control").
-														Rows(25).
-														Text(c.input),
+													app.Div().
+														Class("pf-c-code-editor__header").
+														Body(
+															app.Div().
+																Class("pf-c-code-editor__tab").
+																Body(
+																	app.Span().
+																		Class("pf-c-code-editor__tab-icon").
+																		Body(
+																			app.I().Class("fas fa-code"),
+																		),
+																	app.Span().
+																		Class("pf-c-code-editor__tab-text").Text("Go"),
+																),
+														),
+													app.Div().
+														Class("pf-c-code-editor__main").
+														Body(
+															app.Textarea().
+																Placeholder("go-app's syntax will be here").
+																ReadOnly(true).
+																Style("width", "100%").
+																Style("resize", "vertical").
+																Style("border", "0").
+																Class("pf-c-form-control").
+																Rows(25).
+																Text(c.output),
+														),
 												),
 										),
 								),
-						),
-					app.Div().
-						Class("pf-c-form__group").
-						Body(
-							app.Div().
-								Class("pf-c-form__group-control").
-								Body(
-									app.Div().
-										Class("pf-c-form__actions").
-										Body(
-											app.Button().
-												Class("pf-c-button pf-m-primary").
-												Type("submit").
-												Text("Convert to Go"),
-										),
-								),
-						),
-				),
-			app.Div().
-				Class("pf-c-code-editor pf-m-read-only").
-				Body(
-					app.Div().
-						Class("pf-c-code-editor__header").
-						Body(
-							app.Div().
-								Class("pf-c-code-editor__tab").
-								Body(
-									app.Span().
-										Class("pf-c-code-editor__tab-icon").
-										Body(
-											app.I().Class("fas fa-code"),
-										),
-									app.Span().
-										Class("pf-c-code-editor__tab-text").Text("Go"),
-								),
-						),
-					app.Div().
-						Class("pf-c-code-editor__main").
-						Body(
-							app.Textarea().
-								Placeholder("go-app's syntax will be here").
-								ReadOnly(true).
-								Style("width", "100%").
-								Style("resize", "vertical").
-								Style("border", "0").
-								Class("pf-c-form-control").
-								Rows(25).
-								Text(c.output),
 						),
 				),
 		),
