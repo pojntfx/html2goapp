@@ -8,16 +8,16 @@
 <meta name="keywords" content>
 <meta name="theme-color" content="#2d2c2c">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
-<meta property="og:url" content="http://127.0.0.1:38117/">
+<meta property="og:url" content="http://127.0.0.1:45013/">
 <meta property="og:title" content>
 <meta property="og:description" content="Convert HTML markup to go-app.dev's syntax">
-<meta property="og:type" content="website">
+<meta content="website" property="og:type">
 <meta property="og:image" content>
 <title>
 
 </title>
 <link rel="icon" type="image/png" href="https://storage.googleapis.com/murlok-github/icon-192.png">
-<link rel="apple-touch-icon" href="https://storage.googleapis.com/murlok-github/icon-192.png">
+<link href="https://storage.googleapis.com/murlok-github/icon-192.png" rel="apple-touch-icon">
 <link rel="manifest" href="/html2goapp/manifest.webmanifest">
 <link type="text/css" rel="stylesheet" href="/html2goapp/app.css">
 <script defer="true" src="/html2goapp/wasm_exec.js"></script>
@@ -32,9 +32,31 @@ Loading
 </p>
 </aside>
 <div id="app-pre-render">
+<div>
+<header>
 <h1>
-Hello, world!
+HTML to go-app Converter
 </h1>
+</header>
+<main>
+<section id="input">
+<textarea placeholder="Enter HTML here" value></textarea>
+</section>
+<section id="actions">
+<button>
+Convert
+</button>
+</section>
+<section id="output">
+<textarea value placeholder="go-app's syntax will be here" readonly="true"></textarea>
+</section>
+</main>
+<footer>
+<a href="https://github.com/pojntfx/html2goapp" target="_blank">
+© 2021 AGPL-3.0 Felicitas Pojtinger
+</a>
+</footer>
+</div>
 </div>
 </div>
 </body>
