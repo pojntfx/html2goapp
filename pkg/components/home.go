@@ -43,19 +43,40 @@ func (c *Home) Render() app.UI {
 
 					c.output = generated
 				}).Body(
-					app.Label().Text("HTML Input").For("html-input"),
-					app.Br(),
-					app.Textarea().
-						ID("html-input").
-						Placeholder("Enter HTML here").
-						Required(true).
-						OnInput(func(ctx app.Context, e app.Event) {
-							c.input = ctx.JSSrc().Get("value").String()
-						}).
-						Style("width", "100%").
-						Style("resize", "vertical").
-						Rows(25).
-						Text(c.input),
+					app.Div().
+						Class("pf-c-code-editor").
+						Body(
+							app.Div().
+								Class("pf-c-code-editor__header").
+								Body(
+									app.Div().
+										Class("pf-c-code-editor__tab").
+										Body(
+											app.Span().
+												Class("pf-c-code-editor__tab-icon").
+												Body(
+													app.I().Class("fas fa-code"),
+												),
+											app.Span().
+												Class("pf-c-code-editor__tab-text").Text("HTML"),
+										),
+								),
+							app.Div().
+								Class("pf-c-code-editor__main").
+								Body(
+									app.Textarea().
+										Placeholder("Enter HTML input here").
+										Required(true).
+										OnInput(func(ctx app.Context, e app.Event) {
+											c.input = ctx.JSSrc().Get("value").String()
+										}).
+										Style("width", "100%").
+										Style("resize", "vertical").
+										Class("pf-c-form-control").
+										Rows(25).
+										Text(c.input),
+								),
+						),
 
 					app.Br(),
 					app.Label().Text("go-app Package").For("go-app-pkg-input"),
@@ -97,16 +118,37 @@ func (c *Home) Render() app.UI {
 				),
 			),
 			app.Section().ID("output-section").Body(
-				app.Label().Text("go-app Output").For("go-app-output"),
-				app.Br(),
-				app.Textarea().
-					ID("go-app-output").
-					Placeholder("go-app's syntax will be here").
-					ReadOnly(true).
-					Style("width", "100%").
-					Style("resize", "vertical").
-					Rows(25).
-					Text(c.output),
+				app.Div().
+					Class("pf-c-code-editor pf-m-read-only").
+					Body(
+						app.Div().
+							Class("pf-c-code-editor__header").
+							Body(
+								app.Div().
+									Class("pf-c-code-editor__tab").
+									Body(
+										app.Span().
+											Class("pf-c-code-editor__tab-icon").
+											Body(
+												app.I().Class("fas fa-code"),
+											),
+										app.Span().
+											Class("pf-c-code-editor__tab-text").Text("Go"),
+									),
+							),
+						app.Div().
+							Class("pf-c-code-editor__main").
+							Body(
+								app.Textarea().
+									Placeholder("go-app's syntax will be here").
+									ReadOnly(true).
+									Style("width", "100%").
+									Style("resize", "vertical").
+									Class("pf-c-form-control").
+									Rows(25).
+									Text(c.output),
+							),
+					),
 			),
 		),
 		app.Footer().Body(

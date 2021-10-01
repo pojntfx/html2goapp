@@ -112,7 +112,7 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 					} else {
 						el.Call(Lit(val))
 					}
-				} else if key == "Width" || key == "Height" {
+				} else if key == "Width" || key == "Height" || key == "Rows" || key == "Cols" {
 					// Parse ints for `Width` and `Height`
 					v, err := strconv.Atoi(strings.Trim(fmt.Sprintf("%v", val), "px"))
 					if err != nil {
