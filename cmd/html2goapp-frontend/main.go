@@ -23,6 +23,9 @@ func main() {
 	h := &app.Handler{
 		Name:        "HTML to go-app Converter",
 		Description: "Convert HTML markup to go-app.dev's syntax",
+		Styles: []string{
+			"https://unpkg.com/@patternfly/patternfly@4.135.2/patternfly.css",
+		},
 	}
 
 	if *serve {
