@@ -1,7 +1,7 @@
-const cacheName = "app-" + "12fe81ae3566935c8f31fee3d0944148e2670734";
+const cacheName = "app-" + "a712107d13ebec56551fb2ef73143057c4b67be9";
 
 self.addEventListener("install", event => {
-  console.log("installing app worker 12fe81ae3566935c8f31fee3d0944148e2670734");
+  console.log("installing app worker a712107d13ebec56551fb2ef73143057c4b67be9");
 
   event.waitUntil(
     caches.open(cacheName).
@@ -15,6 +15,7 @@ self.addEventListener("install", event => {
           "/html2goapp/web/app.wasm",
           "https://storage.googleapis.com/murlok-github/icon-192.png",
           "https://storage.googleapis.com/murlok-github/icon-512.png",
+          "https://unpkg.com/@patternfly/patternfly@4.135.2/patternfly.css",
           
         ]);
       }).
@@ -36,7 +37,7 @@ self.addEventListener("activate", event => {
       );
     })
   );
-  console.log("app worker 12fe81ae3566935c8f31fee3d0944148e2670734 is activated");
+  console.log("app worker a712107d13ebec56551fb2ef73143057c4b67be9 is activated");
 });
 
 self.addEventListener("fetch", event => {

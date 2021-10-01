@@ -6,26 +6,27 @@
 <meta name="author" content>
 <meta name="description" content="Convert HTML markup to go-app.dev's syntax">
 <meta name="keywords" content>
-<meta name="theme-color" content="#2d2c2c">
+<meta content="#2d2c2c" name="theme-color">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
-<meta content="http://127.0.0.1:40135/" property="og:url">
-<meta content property="og:title">
-<meta content="Convert HTML markup to go-app.dev's syntax" property="og:description">
+<meta property="og:url" content="http://127.0.0.1:37931/">
+<meta property="og:title" content>
+<meta property="og:description" content="Convert HTML markup to go-app.dev's syntax">
 <meta property="og:type" content="website">
-<meta content property="og:image">
+<meta property="og:image" content>
 <title>
 
 </title>
 <link rel="icon" type="image/png" href="https://storage.googleapis.com/murlok-github/icon-192.png">
-<link href="https://storage.googleapis.com/murlok-github/icon-192.png" rel="apple-touch-icon">
-<link rel="manifest" href="/html2goapp/manifest.webmanifest">
+<link rel="apple-touch-icon" href="https://storage.googleapis.com/murlok-github/icon-192.png">
+<link href="/html2goapp/manifest.webmanifest" rel="manifest">
 <link type="text/css" rel="stylesheet" href="/html2goapp/app.css">
 <script defer="true" src="/html2goapp/wasm_exec.js"></script>
 <script defer="true" src="/html2goapp/app.js"></script>
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly@4.135.2/patternfly.css">
 </head>
 <body>
 <div>
-<aside class="goapp-app-info" id="app-wasm-loader">
+<aside id="app-wasm-loader" class="goapp-app-info">
 <img id="app-wasm-loader-icon" class="goapp-logo goapp-spin" src="https://storage.googleapis.com/murlok-github/icon-192.png">
 <p id="app-wasm-loader-label" class="goapp-label">
 Loading
@@ -41,11 +42,21 @@ HTML to go-app Converter
 <main>
 <section id="input-section">
 <form>
-<label for="html-input">
-HTML Input
-</label>
-<br>
-<textarea placeholder="Enter HTML here" required="true" style="width:100%;resize:vertical;" rows="25" value id="html-input"></textarea>
+<div class="pf-c-code-editor">
+<div class="pf-c-code-editor__header">
+<div class="pf-c-code-editor__tab">
+<span class="pf-c-code-editor__tab-icon">
+<i class="fas fa-code"></i>
+</span>
+<span class="pf-c-code-editor__tab-text">
+HTML
+</span>
+</div>
+</div>
+<div class="pf-c-code-editor__main">
+<textarea placeholder="Enter HTML input here" required="true" style="width:100%;resize:vertical;" class="pf-c-form-control" rows="25" value></textarea>
+</div>
+</div>
 <br>
 <label for="go-app-pkg-input">
 go-app Package
@@ -57,13 +68,13 @@ go-app Package
 Component Package
 </label>
 <br>
-<input required="true" value id="component-pkg-input">
+<input value id="component-pkg-input" required="true">
 <br>
 <label for="component-name-input">
 Component Name
 </label>
 <br>
-<input id="component-name-input" required="true" value>
+<input value id="component-name-input" required="true">
 <br>
 <button type="submit">
 Convert
@@ -71,11 +82,21 @@ Convert
 </form>
 </section>
 <section id="output-section">
-<label for="go-app-output">
-go-app Output
-</label>
-<br>
-<textarea value id="go-app-output" placeholder="go-app's syntax will be here" readonly="true" style="width:100%;resize:vertical;" rows="25"></textarea>
+<div class="pf-c-code-editor pf-m-read-only">
+<div class="pf-c-code-editor__header">
+<div class="pf-c-code-editor__tab">
+<span class="pf-c-code-editor__tab-icon">
+<i class="fas fa-code"></i>
+</span>
+<span class="pf-c-code-editor__tab-text">
+Go
+</span>
+</div>
+</div>
+<div class="pf-c-code-editor__main">
+<textarea placeholder="go-app's syntax will be here" readonly="true" style="width:100%;resize:vertical;" class="pf-c-form-control" rows="25" value></textarea>
+</div>
+</div>
 </section>
 </main>
 <footer>
