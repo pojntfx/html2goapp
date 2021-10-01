@@ -1,11 +1,21 @@
 package components
 
-import "github.com/maxence-charriere/go-app/v9/pkg/app"
+import (
+	"log"
+
+	"github.com/maxence-charriere/go-app/v9/pkg/app"
+	"github.com/pojntfx/html-to-go-app-converter/pkg/converter"
+)
 
 type Home struct {
 	app.Compo
 
-	input  string
+	input string
+
+	goAppPkg  string
+	pkg       string
+	component string
+
 	output string
 }
 
@@ -27,7 +37,19 @@ func (c *Home) Render() app.UI {
 				app.Button().
 					Text("Convert").
 					OnClick(func(ctx app.Context, e app.Event) {
-						c.output = c.input
+						generated, err := converter.ConvertHTMLToComponent(
+							c.input,
+							c.goAppPkg,
+							c.pkg,
+							c.component,
+						)
+						if err != nil {
+							generated += err.Error()
+
+							log.Println("could not convert HTML to component:", err)
+						}
+
+						c.output = generated
 					}),
 			),
 			app.Section().ID("output").Body(
@@ -41,6 +63,12 @@ func (c *Home) Render() app.UI {
 			app.A().Href("https://github.com/pojntfx/html2goapp").Target("_blank").Text("© 2021 AGPL-3.0 Felicitas Pojtinger"),
 		),
 	)
+}
+
+func (c *Home) OnMount(app.Context) {
+	c.goAppPkg = "github.com/maxence-charriere/go-app/v9/pkg/app"
+	c.pkg = "components"
+	c.component = "MyComponent"
 }
 
 func (c *Home) OnAppUpdate(ctx app.Context) {
