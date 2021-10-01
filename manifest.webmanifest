@@ -4,12 +4,12 @@
   "description": "Convert HTML markup to go-app.dev's syntax",
   "icons": [
     {
-      "src": "https://storage.googleapis.com/murlok-github/icon-192.png",
+      "src": "/html2goapp/web/default.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "https://storage.googleapis.com/murlok-github/icon-512.png",
+      "src": "/html2goapp/web/large.png",
       "type": "image/png",
       "sizes": "512x512"
     }

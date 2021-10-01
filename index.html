@@ -2,44 +2,60 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta content="text/html; charset=utf-8" httpequiv="Content-Type">
-<meta name="author" content>
+<meta httpequiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="Felicitas Pojtinger">
 <meta name="description" content="Convert HTML markup to go-app.dev's syntax">
 <meta name="keywords" content>
-<meta name="theme-color" content="#2d2c2c">
+<meta content="#2d2c2c" name="theme-color">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
-<meta property="og:url" content="http://127.0.0.1:34141/">
+<meta property="og:url" content="http://127.0.0.1:34277/">
 <meta property="og:title" content>
 <meta property="og:description" content="Convert HTML markup to go-app.dev's syntax">
 <meta property="og:type" content="website">
-<meta content property="og:image">
+<meta property="og:image" content>
 <title>
 
 </title>
-<link href="https://storage.googleapis.com/murlok-github/icon-192.png" rel="icon" type="image/png">
-<link rel="apple-touch-icon" href="https://storage.googleapis.com/murlok-github/icon-192.png">
+<link rel="icon" type="image/png" href="/html2goapp/web/default.png">
+<link rel="apple-touch-icon" href="/html2goapp/web/default.png">
 <link rel="manifest" href="/html2goapp/manifest.webmanifest">
 <link type="text/css" rel="stylesheet" href="/html2goapp/app.css">
-<script src="/html2goapp/wasm_exec.js" defer="true"></script>
+<script defer="true" src="/html2goapp/wasm_exec.js"></script>
 <script defer="true" src="/html2goapp/app.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly@4.135.2/patternfly.css" type="text/css">
+<link href="https://unpkg.com/@patternfly/patternfly@4.135.2/patternfly.css" type="text/css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly@4.135.2/patternfly-addons.css">
 </head>
 <body>
 <div>
-<aside class="goapp-app-info" id="app-wasm-loader">
-<img src="https://storage.googleapis.com/murlok-github/icon-192.png" id="app-wasm-loader-icon" class="goapp-logo goapp-spin">
+<aside id="app-wasm-loader" class="goapp-app-info">
+<img class="goapp-logo goapp-spin" src="/html2goapp/web/default.png" id="app-wasm-loader-icon">
 <p id="app-wasm-loader-label" class="goapp-label">
-Loading
+Loading HTML to go-app Converter
 </p>
 </aside>
 <div id="app-pre-render">
-<div>
-<header>
-<h1>
-HTML to go-app Converter
-</h1>
+<div class="pf-c-page">
+<a class="pf-c-skip-to-content pf-c-button pf-m-primary" href="#main">
+Skip to content
+</a>
+<header class="pf-c-page__header">
+<div class="pf-c-page__header-brand">
+<a href="#" class="pf-c-page__header-brand-link">
+<img class="pf-c-brand" src="/html2goapp/web/logo.png" alt="Logo">
+</a>
+</div>
+<div class="pf-c-page__header-tools">
+<div class="pf-c-page__header-tools-group">
+<div class="pf-c-page__header-tools-item">
+<a href="https://github.com/pojntfx/html2goapp" target="_blank" class="pf-c-button pf-m-plain" aria-label="Help">
+<i aria-hidden="true" class="pf-icon pf-icon-help"></i>
+</a>
+</div>
+</div>
+</div>
 </header>
-<main>
+<main id="main" class="pf-c-page__main" tabindex="-1">
+<section class="pf-c-page__main-section pf-m-fill">
 <div class="pf-l-grid pf-m-gutter pf-m-all-6-col-on-xl">
 <div class="pf-l-grid__item">
 <div class="pf-c-card">
@@ -54,7 +70,7 @@ Input
 <span class="pf-c-form__label-text">
 go-App Package
 </span>
-<span class="pf-c-form__label-required" aria-hidden="true">
+<span aria-hidden="true" class="pf-c-form__label-required">
 *
 </span>
 </label>
@@ -65,7 +81,7 @@ go-App Package
 </div>
 <div class="pf-c-form__group">
 <div class="pf-c-form__group-label">
-<label class="pf-c-form__label" for="component-pkg-input">
+<label for="component-pkg-input" class="pf-c-form__label">
 <span class="pf-c-form__label-text">
 Target Package
 </span>
@@ -75,7 +91,7 @@ Target Package
 </label>
 </div>
 <div class="pf-c-form__group-control">
-<input id="component-pkg-input" class="pf-c-form-control" required="true" value type="text">
+<input class="pf-c-form-control" required="true" value type="text" id="component-pkg-input">
 </div>
 </div>
 <div class="pf-c-form__group">
@@ -84,13 +100,13 @@ Target Package
 <span class="pf-c-form__label-text">
 Component Name
 </span>
-<span class="pf-c-form__label-required" aria-hidden="true">
+<span aria-hidden="true" class="pf-c-form__label-required">
 *
 </span>
 </label>
 </div>
 <div class="pf-c-form__group-control">
-<input required="true" value id="component-name-input" class="pf-c-form-control" type="text">
+<input value id="component-name-input" class="pf-c-form-control" type="text" required="true">
 </div>
 </div>
 <div class="pf-c-form__group">
@@ -153,19 +169,15 @@ Go
 </div>
 </div>
 <div class="pf-c-code-editor__main">
-<textarea placeholder="go-app's syntax will be here" readonly="true" style="width:100%;resize:vertical;border:0;" class="pf-c-form-control" rows="25" value></textarea>
+<textarea rows="25" value placeholder="go-app's syntax will be here" readonly="true" style="width:100%;resize:vertical;border:0;" class="pf-c-form-control"></textarea>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
+</section>
 </main>
-<footer>
-<a href="https://github.com/pojntfx/html2goapp" target="_blank">
-© 2021 AGPL-3.0 Felicitas Pojtinger
-</a>
-</footer>
 </div>
 </div>
 </div>
