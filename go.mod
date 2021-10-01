@@ -10,6 +10,8 @@ require (
 
 require (
 	github.com/google/go-cmp v0.5.4 // indirect
+	github.com/google/uuid v1.3.0 // indirect
+	github.com/maxence-charriere/go-app/v9 v9.0.0 // indirect
 	golang.org/x/mod v0.4.0 // indirect
 	golang.org/x/tools v0.0.0-20210101214203-2dba1e4ea05c // indirect
 )
