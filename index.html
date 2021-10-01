@@ -2,30 +2,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta content="text/html; charset=utf-8" httpequiv="Content-Type">
+<meta httpequiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="author" content>
 <meta name="description" content="Convert HTML markup to go-app.dev's syntax">
 <meta name="keywords" content>
 <meta name="theme-color" content="#2d2c2c">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
-<meta content="http://127.0.0.1:43297/" property="og:url">
-<meta property="og:title" content>
-<meta property="og:description" content="Convert HTML markup to go-app.dev's syntax">
+<meta content="http://127.0.0.1:40135/" property="og:url">
+<meta content property="og:title">
+<meta content="Convert HTML markup to go-app.dev's syntax" property="og:description">
 <meta property="og:type" content="website">
-<meta property="og:image" content>
+<meta content property="og:image">
 <title>
 
 </title>
 <link rel="icon" type="image/png" href="https://storage.googleapis.com/murlok-github/icon-192.png">
-<link rel="apple-touch-icon" href="https://storage.googleapis.com/murlok-github/icon-192.png">
-<link href="/html2goapp/manifest.webmanifest" rel="manifest">
+<link href="https://storage.googleapis.com/murlok-github/icon-192.png" rel="apple-touch-icon">
+<link rel="manifest" href="/html2goapp/manifest.webmanifest">
 <link type="text/css" rel="stylesheet" href="/html2goapp/app.css">
 <script defer="true" src="/html2goapp/wasm_exec.js"></script>
 <script defer="true" src="/html2goapp/app.js"></script>
 </head>
 <body>
 <div>
-<aside id="app-wasm-loader" class="goapp-app-info">
+<aside class="goapp-app-info" id="app-wasm-loader">
 <img id="app-wasm-loader-icon" class="goapp-logo goapp-spin" src="https://storage.googleapis.com/murlok-github/icon-192.png">
 <p id="app-wasm-loader-label" class="goapp-label">
 Loading
@@ -45,7 +45,7 @@ HTML to go-app Converter
 HTML Input
 </label>
 <br>
-<textarea required="true" style="width:100%;resize:vertical;" rows="25" value id="html-input" placeholder="Enter HTML here"></textarea>
+<textarea placeholder="Enter HTML here" required="true" style="width:100%;resize:vertical;" rows="25" value id="html-input"></textarea>
 <br>
 <label for="go-app-pkg-input">
 go-app Package
@@ -75,11 +75,11 @@ Convert
 go-app Output
 </label>
 <br>
-<textarea id="go-app-output" placeholder="go-app's syntax will be here" readonly="true" style="width:100%;resize:vertical;" rows="25" value></textarea>
+<textarea value id="go-app-output" placeholder="go-app's syntax will be here" readonly="true" style="width:100%;resize:vertical;" rows="25"></textarea>
 </section>
 </main>
 <footer>
-<a target="_blank" href="https://github.com/pojntfx/html2goapp">
+<a href="https://github.com/pojntfx/html2goapp" target="_blank">
 © 2021 AGPL-3.0 Felicitas Pojtinger
 </a>
 </footer>
