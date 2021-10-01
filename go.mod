@@ -1,4 +1,4 @@
-module github.com/pojntfx/html-to-go-app-converter
+module github.com/pojntfx/html2goapp
 
 go 1.17
 

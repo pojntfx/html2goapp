@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 
-	"github.com/pojntfx/html-to-go-app-converter/pkg/converter"
+	"github.com/pojntfx/html2goapp/pkg/converter"
 )
 
 func main() {

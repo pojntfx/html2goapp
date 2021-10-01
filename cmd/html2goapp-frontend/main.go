@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
-	"github.com/pojntfx/html-to-go-app-converter/pkg/components"
+	"github.com/pojntfx/html2goapp/pkg/components"
 )
 
 func main() {
@@ -21,10 +21,17 @@ func main() {
 	app.RunWhenOnBrowser()
 
 	h := &app.Handler{
-		Name:        "HTML to go-app Converter",
-		Description: "Convert HTML markup to go-app.dev's syntax",
+		Name:         "HTML to go-app Converter",
+		Description:  "Convert HTML markup to go-app.dev's syntax",
+		Author:       "Felix Pojtinger",
+		LoadingLabel: "Loading HTML to go-app Converter",
+		Icon: app.Icon{
+			Default: "/web/default.png",
+			Large:   "/web/large.png",
+		},
 		Styles: []string{
 			"https://unpkg.com/@patternfly/patternfly@4.135.2/patternfly.css",
+			"https://unpkg.com/@patternfly/patternfly@4.135.2/patternfly-addons.css",
 		},
 	}
 
