@@ -1,0 +1,22 @@
+{
+  "short_name": "HTML to go-app Converter",
+  "name": "HTML to go-app Converter",
+  "description": "Convert HTML markup to go-app.dev's syntax",
+  "icons": [
+    {
+      "src": "https://storage.googleapis.com/murlok-github/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://storage.googleapis.com/murlok-github/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "scope": "/html2goapp/",
+  "start_url": "/html2goapp/",
+  "background_color": "#2d2c2c",
+  "theme_color": "#2d2c2c",
+  "display": "standalone"
+}
