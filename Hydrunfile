@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ "$1" = "pwa" ]; then
+    # Build
+    make -j "$(nproc)" build/pwa
+else
+    # Install native dependencies
+    apt update
+    apt install -y curl
+
+    # Install bagop
+    curl -L -o /tmp/bagop "https://github.com/pojntfx/bagop/releases/latest/download/bagop.linux-$(uname -m)"
+    install /tmp/bagop /usr/local/bin
+
+    # Build
+    CGO_ENABLED=0 bagop -j "$(nproc)" -b html2goapp-cli -x '(android/*|ios/*)' -p 'make build/cli DST=$DST' -d out/cli
+fi

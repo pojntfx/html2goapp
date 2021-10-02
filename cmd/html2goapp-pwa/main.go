@@ -12,8 +12,8 @@ import (
 func main() {
 	serve := flag.Bool("serve", false, "Serve the app instead of building it")
 	laddr := flag.String("laddr", "0.0.0.0:1234", "Address to listen on when serving the app")
-	dist := flag.String("dist", "out", "Directory to build the app to")
-	prefix := flag.String("prefix", "html2goapp", "Prefix to build the app for")
+	dist := flag.String("dist", "out/pwa/web", "Directory to build the app to")
+	prefix := flag.String("prefix", "/html2goapp", "Prefix to build the app for")
 
 	flag.Parse()
 
