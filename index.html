@@ -8,8 +8,8 @@
 <meta name="keywords" content>
 <meta content="#2d2c2c" name="theme-color">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
-<meta property="og:url" content="http://127.0.0.1:34277/">
-<meta property="og:title" content>
+<meta property="og:url" content="http://127.0.0.1:44841/">
+<meta content property="og:title">
 <meta property="og:description" content="Convert HTML markup to go-app.dev's syntax">
 <meta property="og:type" content="website">
 <meta property="og:image" content>
@@ -27,9 +27,9 @@
 </head>
 <body>
 <div>
-<aside id="app-wasm-loader" class="goapp-app-info">
-<img class="goapp-logo goapp-spin" src="/html2goapp/web/default.png" id="app-wasm-loader-icon">
-<p id="app-wasm-loader-label" class="goapp-label">
+<aside class="goapp-app-info" id="app-wasm-loader">
+<img id="app-wasm-loader-icon" class="goapp-logo goapp-spin" src="/html2goapp/web/default.png">
+<p class="goapp-label" id="app-wasm-loader-label">
 Loading HTML to go-app Converter
 </p>
 </aside>
@@ -70,7 +70,7 @@ Input
 <span class="pf-c-form__label-text">
 go-App Package
 </span>
-<span aria-hidden="true" class="pf-c-form__label-required">
+<span class="pf-c-form__label-required" aria-hidden="true">
 *
 </span>
 </label>
@@ -81,7 +81,7 @@ go-App Package
 </div>
 <div class="pf-c-form__group">
 <div class="pf-c-form__group-label">
-<label for="component-pkg-input" class="pf-c-form__label">
+<label class="pf-c-form__label" for="component-pkg-input">
 <span class="pf-c-form__label-text">
 Target Package
 </span>
@@ -91,7 +91,7 @@ Target Package
 </label>
 </div>
 <div class="pf-c-form__group-control">
-<input class="pf-c-form-control" required="true" value type="text" id="component-pkg-input">
+<input required="true" value type="text" id="component-pkg-input" class="pf-c-form-control">
 </div>
 </div>
 <div class="pf-c-form__group">
@@ -100,13 +100,13 @@ Target Package
 <span class="pf-c-form__label-text">
 Component Name
 </span>
-<span aria-hidden="true" class="pf-c-form__label-required">
+<span class="pf-c-form__label-required" aria-hidden="true">
 *
 </span>
 </label>
 </div>
 <div class="pf-c-form__group-control">
-<input value id="component-name-input" class="pf-c-form-control" type="text" required="true">
+<input class="pf-c-form-control" type="text" required="true" value id="component-name-input">
 </div>
 </div>
 <div class="pf-c-form__group">
@@ -133,7 +133,7 @@ HTML
 </div>
 </div>
 <div class="pf-c-code-editor__main">
-<textarea id="html-input" placeholder="Enter HTML input here" required="true" style="width:100%;resize:vertical;border:0;" class="pf-c-form-control" rows="25" value></textarea>
+<textarea class="pf-c-form-control" rows="25" value id="html-input" placeholder="Enter HTML input here" required="true" style="width:100%;resize:vertical;border:0;"></textarea>
 </div>
 </div>
 </div>
@@ -169,7 +169,7 @@ Go
 </div>
 </div>
 <div class="pf-c-code-editor__main">
-<textarea rows="25" value placeholder="go-app's syntax will be here" readonly="true" style="width:100%;resize:vertical;border:0;" class="pf-c-form-control"></textarea>
+<textarea class="pf-c-form-control" rows="25" value placeholder="go-app's syntax will be here" readonly="true" style="width:100%;resize:vertical;border:0;"></textarea>
 </div>
 </div>
 </div>
