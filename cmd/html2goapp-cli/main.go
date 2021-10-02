@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+	// Parse the flags
 	src := flag.String("src", "index.html", "HTML source file to convert")
 	goAppPkg := flag.String("goAppPkg", "github.com/maxence-charriere/go-app/v9/pkg/app", "Package to use for go-app")
 	pkg := flag.String("pkg", "components", "Package to generate component in")
@@ -17,22 +18,25 @@ func main() {
 
 	flag.Parse()
 
-	htmlSrc, err := ioutil.ReadFile(*src)
+	// Open the input file
+	htmlInput, err := ioutil.ReadFile(*src)
 	if err != nil {
 		log.Fatal("could not open HTML source file:", err)
 	}
 
-	source, err := converter.ConvertHTMLToComponent(
-		string(htmlSrc),
+	// Convert to Go
+	goOutput, err := converter.ConvertHTMLToComponent(
+		string(htmlInput),
 		*goAppPkg,
 		*pkg,
 		*component,
 	)
 	if err != nil {
-		fmt.Print(source)
+		fmt.Print(goOutput)
 
 		log.Fatal("could not convert HTML to component:", err)
 	}
 
-	fmt.Print(source)
+	// Output the generated Go source
+	fmt.Print(goOutput)
 }

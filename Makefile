@@ -15,7 +15,7 @@ build/cli:
 
 build/pwa:
 	GOARCH=wasm GOOS=js go build -o web/app.wasm ./cmd/html2goapp-pwa
-	go run ./cmd/html2goapp-pwa
+	go run ./cmd/html2goapp-pwa -prefix $(WWWPREFIX)
 	cp -rf web/* out/pwa/web/web
 	tar -cvzf out/pwa/html2goapp-pwa.tar.gz -C out/pwa/web .
 
