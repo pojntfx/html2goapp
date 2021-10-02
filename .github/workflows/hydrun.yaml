@@ -57,9 +57,9 @@ jobs:
           path: /tmp/out
       - name: Isolate the repositories
         run: |
-          mkdir -p /tmp/out/github-pages
+          mkdir -p /tmp/github-pages
 
-          mv /tmp/out/pwa/web/* /tmp/out/github-pages
+          cp -r /tmp/out/pwa/web/* /tmp/github-pages
       - name: Publish pre-release to GitHub releases
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: marvinpinto/action-automatic-releases@latest
@@ -82,6 +82,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: gh-pages
-          folder: /tmp/out/github-pages
+          folder: /tmp/github-pages
           git-config-name: GitHub Pages Bot
           git-config-email: bot@example.com
