@@ -8,28 +8,28 @@
 <meta name="keywords" content>
 <meta name="theme-color" content="#2d2c2c">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
-<meta property="og:url" content="http://127.0.0.1:38337/">
+<meta property="og:url" content="http://127.0.0.1:35043/">
 <meta property="og:title" content>
-<meta property="og:description" content="Convert HTML markup to go-app.dev's syntax">
-<meta content="website" property="og:type">
+<meta content="Convert HTML markup to go-app.dev's syntax" property="og:description">
+<meta property="og:type" content="website">
 <meta property="og:image" content>
 <title>
 
 </title>
-<link type="image/png" href="/html2goapp/web/default.png" rel="icon">
-<link rel="apple-touch-icon" href="/html2goapp/web/default.png">
-<link rel="manifest" href="/html2goapp/manifest.webmanifest">
+<link rel="icon" type="image/png" href="/html2goapp/web/default.png">
+<link href="/html2goapp/web/default.png" rel="apple-touch-icon">
+<link href="/html2goapp/manifest.webmanifest" rel="manifest">
 <link type="text/css" rel="stylesheet" href="/html2goapp/app.css">
 <script defer="true" src="/html2goapp/wasm_exec.js"></script>
 <script defer="true" src="/html2goapp/app.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly@4.135.2/patternfly.css" type="text/css">
-<link type="text/css" rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly@4.135.2/patternfly-addons.css">
+<link href="https://unpkg.com/@patternfly/patternfly@4.135.2/patternfly.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly@4.135.2/patternfly-addons.css" type="text/css">
 </head>
 <body>
 <div>
 <aside id="app-wasm-loader" class="goapp-app-info">
 <img id="app-wasm-loader-icon" class="goapp-logo goapp-spin" src="/html2goapp/web/default.png">
-<p id="app-wasm-loader-label" class="goapp-label">
+<p class="goapp-label" id="app-wasm-loader-label">
 Loading HTML to go-app Converter
 </p>
 </aside>
@@ -40,21 +40,21 @@ Skip to content
 </a>
 <header class="pf-c-page__header">
 <div class="pf-c-page__header-brand">
-<a href="#" class="pf-c-page__header-brand-link">
-<img alt="Logo" class="pf-c-brand" src="/html2goapp/web/logo.png">
+<a class="pf-c-page__header-brand-link" href="#">
+<img class="pf-c-brand" src="/html2goapp/web/logo.png" alt="Logo">
 </a>
 </div>
 <div class="pf-c-page__header-tools">
 <div class="pf-c-page__header-tools-group">
 <div class="pf-c-page__header-tools-item">
-<a class="pf-c-button pf-m-plain" aria-label="Help" href="https://github.com/pojntfx/html2goapp" target="_blank">
+<a href="https://github.com/pojntfx/html2goapp" target="_blank" class="pf-c-button pf-m-plain" aria-label="Help">
 <i class="pf-icon pf-icon-help" aria-hidden="true"></i>
 </a>
 </div>
 </div>
 </div>
 </header>
-<main id="main" class="pf-c-page__main" tabindex="-1">
+<main class="pf-c-page__main" tabindex="-1" id="main">
 <section class="pf-c-page__main-section pf-m-fill">
 <div class="pf-l-grid pf-m-gutter pf-m-all-6-col-on-xl">
 <div class="pf-l-grid__item">
@@ -76,7 +76,7 @@ go-App Package
 </label>
 </div>
 <div class="pf-c-form__group-control">
-<input class="pf-c-form-control" required="true" value type="text" id="go-app-pkg-input">
+<input type="text" id="go-app-pkg-input" class="pf-c-form-control" required="true" value>
 </div>
 </div>
 <div class="pf-c-form__group">
@@ -91,12 +91,12 @@ Target Package
 </label>
 </div>
 <div class="pf-c-form__group-control">
-<input class="pf-c-form-control" required="true" value type="text" id="component-pkg-input">
+<input type="text" id="component-pkg-input" class="pf-c-form-control" required="true" value>
 </div>
 </div>
 <div class="pf-c-form__group">
 <div class="pf-c-form__group-label">
-<label for="component-name-input" class="pf-c-form__label">
+<label class="pf-c-form__label" for="component-name-input">
 <span class="pf-c-form__label-text">
 Component Name
 </span>
@@ -106,7 +106,7 @@ Component Name
 </label>
 </div>
 <div class="pf-c-form__group-control">
-<input class="pf-c-form-control" type="text" required="true" value id="component-name-input">
+<input id="component-name-input" class="pf-c-form-control" type="text" required="true" value>
 </div>
 </div>
 <div class="pf-c-form__group">
@@ -115,7 +115,7 @@ Component Name
 <span class="pf-c-form__label-text">
 Source Code
 </span>
-<span aria-hidden="true" class="pf-c-form__label-required">
+<span class="pf-c-form__label-required" aria-hidden="true">
 *
 </span>
 </label>
@@ -133,7 +133,7 @@ HTML
 </div>
 </div>
 <div class="pf-c-code-editor__main">
-<textarea required="true" style="width:100%;resize:vertical;border:0;" class="pf-c-form-control" rows="25" value id="html-input" placeholder="Enter HTML input here"></textarea>
+<textarea placeholder="Enter HTML input here" required="true" style="width:100%;resize:vertical;border:0;" class="pf-c-form-control" rows="25" value id="html-input"></textarea>
 </div>
 </div>
 </div>
@@ -141,7 +141,7 @@ HTML
 <div class="pf-c-form__group">
 <div class="pf-c-form__group-control">
 <div class="pf-c-form__actions">
-<button type="submit" class="pf-c-button pf-m-primary">
+<button class="pf-c-button pf-m-primary" type="submit">
 Convert to Go
 </button>
 </div>
@@ -169,7 +169,7 @@ Go
 </div>
 </div>
 <div class="pf-c-code-editor__main">
-<textarea readonly="true" style="width:100%;resize:vertical;border:0;" class="pf-c-form-control" rows="25" value placeholder="go-app's syntax will be here"></textarea>
+<textarea placeholder="go-app's syntax will be here" readonly="true" style="width:100%;resize:vertical;border:0;" class="pf-c-form-control" rows="25" value></textarea>
 </div>
 </div>
 </div>
