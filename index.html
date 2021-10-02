@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta httpequiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="text/html; charset=utf-8" httpequiv="Content-Type">
 <meta name="author" content="Felicitas Pojtinger">
 <meta name="description" content="Convert HTML markup to go-app.dev's syntax.">
 <meta name="keywords" content="html-converter, code-generation, go-app">
-<meta name="theme-color" content="#151515">
+<meta content="#151515" name="theme-color">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
-<meta property="og:url" content="http://127.0.0.1:45141/">
+<meta property="og:url" content="http://127.0.0.1:40415/">
 <meta property="og:title" content="HTML to go-app Converter">
 <meta property="og:description" content="Convert HTML markup to go-app.dev's syntax.">
 <meta property="og:type" content="website">
@@ -18,7 +18,7 @@ HTML to go-app Converter
 </title>
 <link rel="icon" type="image/png" href="/html2goapp/web/default.png">
 <link rel="apple-touch-icon" href="/html2goapp/web/default.png">
-<link rel="manifest" href="/html2goapp/manifest.webmanifest">
+<link href="/html2goapp/manifest.webmanifest" rel="manifest">
 <link type="text/css" rel="stylesheet" href="/html2goapp/app.css">
 <script defer="true" src="/html2goapp/wasm_exec.js"></script>
 <script defer="true" src="/html2goapp/app.js"></script>
@@ -31,9 +31,9 @@ HTML to go-app Converter
 </head>
 <body>
 <div>
-<aside id="app-wasm-loader" class="goapp-app-info">
-<img id="app-wasm-loader-icon" class="goapp-logo goapp-spin" src="/html2goapp/web/default.png">
-<p id="app-wasm-loader-label" class="goapp-label">
+<aside class="goapp-app-info" id="app-wasm-loader">
+<img class="goapp-logo goapp-spin" src="/html2goapp/web/default.png" id="app-wasm-loader-icon">
+<p class="goapp-label" id="app-wasm-loader-label">
 Convert HTML markup to go-app.dev&#39;s syntax.
 </p>
 </aside>
@@ -51,14 +51,14 @@ Skip to content
 <div class="pf-c-page__header-tools">
 <div class="pf-c-page__header-tools-group">
 <div class="pf-c-page__header-tools-item">
-<a aria-label="Help" href="https://github.com/pojntfx/html2goapp" target="_blank" class="pf-c-button pf-m-plain">
+<a href="https://github.com/pojntfx/html2goapp" target="_blank" class="pf-c-button pf-m-plain" aria-label="Help">
 <i class="pf-icon pf-icon-help" aria-hidden="true"></i>
 </a>
 </div>
 </div>
 </div>
 </header>
-<main class="pf-c-page__main" tabindex="-1" id="main">
+<main id="main" class="pf-c-page__main" tabindex="-1">
 <section class="pf-c-page__main-section pf-m-fill">
 <div class="pf-l-grid pf-m-gutter pf-m-all-6-col-on-xl">
 <div class="pf-l-grid__item">
@@ -89,7 +89,7 @@ go-App Package
 <span class="pf-c-form__label-text">
 Target Package
 </span>
-<span class="pf-c-form__label-required" aria-hidden="true">
+<span aria-hidden="true" class="pf-c-form__label-required">
 *
 </span>
 </label>
@@ -110,7 +110,7 @@ Component Name
 </label>
 </div>
 <div class="pf-c-form__group-control">
-<input class="pf-c-form-control" type="text" required="true" value id="component-name-input">
+<input required="true" value id="component-name-input" class="pf-c-form-control" type="text">
 </div>
 </div>
 <div class="pf-c-form__group">
@@ -119,7 +119,7 @@ Component Name
 <span class="pf-c-form__label-text">
 Source Code
 </span>
-<span class="pf-c-form__label-required" aria-hidden="true">
+<span aria-hidden="true" class="pf-c-form__label-required">
 *
 </span>
 </label>
@@ -173,7 +173,7 @@ Go
 </div>
 </div>
 <div class="pf-c-code-editor__main">
-<textarea placeholder="go-app's syntax will be here" readonly="true" style="width:100%;resize:vertical;border:0;" class="pf-c-form-control" rows="25" value></textarea>
+<textarea style="width:100%;resize:vertical;border:0;" class="pf-c-form-control" rows="25" value placeholder="go-app's syntax will be here" readonly="true"></textarea>
 </div>
 </div>
 </div>
