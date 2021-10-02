@@ -1,7 +1,7 @@
 {
-  "short_name": "HTML to go-app Converter",
+  "short_name": "html2goapp",
   "name": "HTML to go-app Converter",
-  "description": "Convert HTML markup to go-app.dev's syntax",
+  "description": "Convert HTML markup to go-app.dev's syntax.",
   "icons": [
     {
       "src": "/html2goapp/web/default.png",
@@ -16,7 +16,7 @@
   ],
   "scope": "/html2goapp/",
   "start_url": "/html2goapp/",
-  "background_color": "#2d2c2c",
-  "theme_color": "#2d2c2c",
+  "background_color": "#151515",
+  "theme_color": "#151515",
   "display": "standalone"
 }
