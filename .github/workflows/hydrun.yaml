@@ -59,7 +59,7 @@ jobs:
         run: |
           mkdir -p /tmp/out/github-pages
 
-          cp -r /tmp/out/pwa/web/* /tmp/out/github-pages
+          mv /tmp/out/pwa/web/* /tmp/out/github-pages
       - name: Publish pre-release to GitHub releases
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: marvinpinto/action-automatic-releases@latest
