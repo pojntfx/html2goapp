@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	. "github.com/dave/jennifer/jen"
+	"github.com/yosssi/gohtml"
 	"golang.org/x/net/html"
 	"mvdan.cc/gofumpt/format"
 )
@@ -16,9 +17,16 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 	crawler = func(node *html.Node, nthChild int) (*Statement, error) {
 		el := Null()
 
+		if node == nil {
+			return el, nil
+		}
+
 		if node.Type == html.TextNode && strings.TrimSpace(node.Data) != "" {
 			// Handle text node
-			el = Qual(goAppPkg, "Text").Call(Lit(node.Data))
+			el = Qual(goAppPkg, "Text").Call(Lit(strings.TrimSpace(node.Data)))
+			if nthChild > 1 {
+				el = Line().Qual(goAppPkg, "Text").Call(Lit(strings.TrimSpace(node.Data)))
+			}
 		} else if node.Type == html.ElementNode && node.DataAtom.String() != "" {
 			// Handle complex node
 			el = Qual(goAppPkg, formatTag(node.DataAtom.String())).Call()
@@ -214,7 +222,7 @@ func ConvertHTMLToComponent(
 	componentName string,
 ) (string, error) {
 	// Parse HTML input
-	root, err := html.Parse(strings.NewReader(htmlInput))
+	root, err := html.Parse(strings.NewReader(gohtml.Format(htmlInput)))
 	if err != nil {
 		return "", err
 	}

@@ -96,7 +96,7 @@ func (c *PF4Tabs) Render() app.UI {
 				DataSet("ouia-component-type", "PF4/TabContent").
 				DataSet("ouia-safe", true).
 				Body(
-					app.Text("\n    Users\n  "),
+					app.Text("Users"),
 				),
 			app.Section().
 				Class("pf-c-tab-content").
@@ -108,7 +108,7 @@ func (c *PF4Tabs) Render() app.UI {
 				DataSet("ouia-safe", true).
 				Hidden(true).
 				Body(
-					app.Text("\n    Containers\n  "),
+					app.Text("Containers"),
 				),
 			app.Section().
 				Hidden(true).
@@ -120,7 +120,7 @@ func (c *PF4Tabs) Render() app.UI {
 				DataSet("ouia-component-type", "PF4/TabContent").
 				DataSet("ouia-safe", true).
 				Body(
-					app.Text("\n    Database\n  "),
+					app.Text("Database"),
 				),
 			app.Div().
 				Style("margin-top", " 20px").
