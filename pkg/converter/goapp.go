@@ -28,7 +28,7 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 
 			for _, attr := range node.Attr {
 				// Attributes to ignore
-				if attr.Key == "gutter" || attr.Key == "onload" {
+				if attr.Key == "gutter" || attr.Key == "onload" || attr.Key == "onclick" || attr.Key == "loading" || attr.Key == "itemscope" || attr.Key == "itemtype" || attr.Key == "itemprop" || attr.Key == "scoped" {
 					continue
 				}
 
@@ -102,8 +102,8 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 					} else {
 						el.Call(Lit(false))
 					}
-				} else if key == "CrossOrigin" {
-					// Convert boolean to strings for `CrossOrigin`
+				} else if key == "CrossOrigin" || key == "Title" {
+					// Convert boolean to strings for attributes
 					if val == true {
 						el.Call(Lit("true"))
 					} else {
@@ -148,6 +148,11 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 		}
 
 		if len(children) > 0 {
+			// Add to the body if children are not empty
+			if len(children) >= 2 && fmt.Sprintf("%#v", children[1]) == "" {
+				return el, nil
+			}
+
 			el.Dot("").Line().Id("Body").Call(Line().List(append(children, Line())...))
 		}
 
@@ -158,6 +163,10 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 }
 
 func formatTag(tag string) string {
+	if tag == "noscript" {
+		return "NoScript"
+	}
+
 	return strings.Join(strings.Fields(strings.Title(strings.ReplaceAll(tag, "-", " "))), "")
 }
 
@@ -184,6 +193,14 @@ func formatKey(key string) string {
 
 	if key == "Crossorigin" {
 		return "CrossOrigin"
+	}
+
+	if key == "Srcset" {
+		return "SrcSet"
+	}
+
+	if key == "Datetime" {
+		return "DateTime"
 	}
 
 	return key
