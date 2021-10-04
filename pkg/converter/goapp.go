@@ -46,7 +46,7 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 
 					key = formatKey(formatTag(parts[0]))
 
-					el.Dot(key)
+					el.Dot("").Line().Id(key)
 
 					if val == "true" {
 						el.Call(Lit(strings.Join(parts[1:], "-")), Lit(true))
@@ -58,7 +58,7 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 				} else {
 					key = formatKey(formatTag(attr.Key))
 
-					el.Dot(key)
+					el.Dot("").Line().Id(key)
 				}
 
 				if key == "TabIndex" {
@@ -83,7 +83,7 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 								if i == 0 {
 									el.Call(Lit(key), Lit(styleParts[i+1]))
 								} else {
-									el.Dot("Style").Call(Lit(key), Lit(styleParts[i+1]))
+									el.Dot("").Line().Id("Style").Call(Lit(key), Lit(styleParts[i+1]))
 								}
 							}
 						}
@@ -144,7 +144,7 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 				children = append(children, child)
 			}
 
-				i++
+			i++
 		}
 
 		if len(children) > 0 {
