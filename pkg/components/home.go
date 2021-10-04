@@ -123,7 +123,11 @@ func (c *Home) Render() app.UI {
 																					Class("pf-c-form-control").
 																					Required(true).
 																					OnInput(func(ctx app.Context, e app.Event) {
-																						c.goAppPkg = ctx.JSSrc().Get("value").String()
+																						if input := ctx.JSSrc().Get("value").String(); input != "" {
+																							c.goAppPkg = input
+
+																							c.convert()
+																						}
 																					}).
 																					Value(c.goAppPkg).
 																					Type("text").
@@ -156,7 +160,11 @@ func (c *Home) Render() app.UI {
 																					Class("pf-c-form-control").
 																					Required(true).
 																					OnInput(func(ctx app.Context, e app.Event) {
-																						c.pkg = ctx.JSSrc().Get("value").String()
+																						if input := ctx.JSSrc().Get("value").String(); input != "" {
+																							c.pkg = input
+
+																							c.convert()
+																						}
 																					}).
 																					Value(c.pkg).
 																					Type("text").
@@ -190,7 +198,11 @@ func (c *Home) Render() app.UI {
 																					Type("text").
 																					Required(true).
 																					OnInput(func(ctx app.Context, e app.Event) {
-																						c.component = ctx.JSSrc().Get("value").String()
+																						if input := ctx.JSSrc().Get("value").String(); input != "" {
+																							c.component = input
+
+																							c.convert()
+																						}
 																					}).
 																					Value(c.component).
 																					ID("component-name-input"),
@@ -233,6 +245,8 @@ func (c *Home) Render() app.UI {
 																											Aria("label", "Format").
 																											OnClick(func(ctx app.Context, e app.Event) {
 																												c.input = gohtml.Format(c.input)
+
+																												c.convert()
 																											}).
 																											Body(
 																												app.I().
@@ -265,11 +279,6 @@ func (c *Home) Render() app.UI {
 																									Required(true).
 																									OnInput(func(ctx app.Context, e app.Event) {
 																										c.input = ctx.JSSrc().Get("value").String()
-																										if c.input == "" {
-																											c.output = ""
-
-																											return
-																										}
 
 																										c.convert()
 																									}).
@@ -369,6 +378,12 @@ func (c *Home) OnAppUpdate(ctx app.Context) {
 }
 
 func (c *Home) convert() {
+	if c.input == "" {
+		c.output = ""
+
+		return
+	}
+
 	generated, err := converter.ConvertHTMLToComponent(
 		c.input,
 		c.goAppPkg,
