@@ -5,6 +5,7 @@ import (
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 	"github.com/pojntfx/html2goapp/pkg/converter"
+	"github.com/yosssi/gohtml"
 )
 
 type Home struct {
@@ -93,19 +94,7 @@ func (c *Home) Render() app.UI {
 															OnSubmit(func(ctx app.Context, e app.Event) {
 																e.PreventDefault()
 
-																generated, err := converter.ConvertHTMLToComponent(
-																	c.input,
-																	c.goAppPkg,
-																	c.pkg,
-																	c.component,
-																)
-																if err != nil {
-																	generated += err.Error()
-
-																	log.Println("could not convert HTML to component:", err)
-																}
-
-																c.output = generated
+																c.convert()
 															}).
 															Body(
 																app.Div().
@@ -236,16 +225,35 @@ func (c *Home) Render() app.UI {
 																							Class("pf-c-code-editor__header").
 																							Body(
 																								app.Div().
+																									Class("pf-c-code-editor__controls").
+																									Body(
+																										app.Button().
+																											Class("pf-c-button pf-m-control").
+																											Type("button").
+																											Aria("label", "Format").
+																											OnClick(func(ctx app.Context, e app.Event) {
+																												c.input = gohtml.Format(c.input)
+																											}).
+																											Body(
+																												app.I().
+																													Class("fas fa-magic").
+																													Aria("hidden", true),
+																											),
+																									),
+																								app.Div().
 																									Class("pf-c-code-editor__tab").
 																									Body(
 																										app.Span().
 																											Class("pf-c-code-editor__tab-icon").
 																											Body(
-																												app.I().Class("fas fa-code"),
+																												app.I().
+																													Class("fas fa-code"),
 																											),
 																										app.Span().
 																											Class("pf-c-code-editor__tab-text").
-																											Text("HTML"),
+																											Body(
+																												app.Text("HTML"),
+																											),
 																									),
 																							),
 																						app.Div().
@@ -257,6 +265,13 @@ func (c *Home) Render() app.UI {
 																									Required(true).
 																									OnInput(func(ctx app.Context, e app.Event) {
 																										c.input = ctx.JSSrc().Get("value").String()
+																										if c.input == "" {
+																											c.output = ""
+
+																											return
+																										}
+
+																										c.convert()
 																									}).
 																									Style("width", "100%").
 																									Style("resize", "vertical").
@@ -351,4 +366,20 @@ func (c *Home) OnAppUpdate(ctx app.Context) {
 	if ctx.AppUpdateAvailable() {
 		ctx.Reload()
 	}
+}
+
+func (c *Home) convert() {
+	generated, err := converter.ConvertHTMLToComponent(
+		c.input,
+		c.goAppPkg,
+		c.pkg,
+		c.component,
+	)
+	if err != nil {
+		generated += err.Error()
+
+		log.Println("could not convert HTML to component:", err)
+	}
+
+	c.output = generated
 }
