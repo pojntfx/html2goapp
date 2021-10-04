@@ -140,7 +140,7 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 		}
 
 		if len(children) > 0 {
-			el.Dot("Body").Call(children...)
+			el.Dot("Body").Call(Line().List(children...))
 		}
 
 		return el, nil
