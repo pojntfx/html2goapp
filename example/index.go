@@ -19,8 +19,7 @@ func (c *PF4Tabs) Render() app.UI {
 						Class("pf-c-tabs__scroll-button").
 						Aria("label", "Scroll left").
 						Aria("hidden", true).
-						Disabled(true).
-						Body(),
+						Disabled(true),
 					app.Ul().
 						Class("pf-c-tabs__list").
 						Body(
@@ -86,8 +85,7 @@ func (c *PF4Tabs) Render() app.UI {
 						Class("pf-c-tabs__scroll-button").
 						Aria("label", "Scroll right").
 						Aria("hidden", true).
-						Disabled(true).
-						Body(),
+						Disabled(true),
 				),
 			app.Section().
 				Class("pf-c-tab-content").
