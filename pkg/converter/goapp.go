@@ -12,8 +12,8 @@ import (
 )
 
 func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error) {
-	var crawler func(*html.Node) (*Statement, error)
-	crawler = func(node *html.Node) (*Statement, error) {
+	var crawler func(node *html.Node, nthChild int) (*Statement, error)
+	crawler = func(node *html.Node, nthChild int) (*Statement, error) {
 		el := Null()
 
 		if node.Type == html.TextNode && strings.TrimSpace(node.Data) != "" {
@@ -22,6 +22,10 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 		} else if node.Type == html.ElementNode && node.DataAtom.String() != "" {
 			// Handle complex node
 			el = Qual(goAppPkg, formatTag(node.DataAtom.String())).Call()
+			if nthChild >= 2 {
+				el = Line().Qual(goAppPkg, formatTag(node.DataAtom.String())).Call()
+			}
+
 			for _, attr := range node.Attr {
 				// Attributes to ignore
 				if attr.Key == "gutter" || attr.Key == "onload" {
@@ -127,26 +131,29 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 		}
 
 		children := []Code{}
+		i := 0
 		for child := node.FirstChild; child != nil; child = child.NextSibling {
 			// Tags to ignore
 			if child.DataAtom.String() != "svg" {
-				child, err := crawler(child)
+				child, err := crawler(child, i)
 				if err != nil {
 					return nil, err
 				}
 
 				children = append(children, child)
+
+				i++
 			}
 		}
 
 		if len(children) > 0 {
-			el.Dot("Body").Call(Line().List(children...))
+			el.Dot("").Line().Id("Body").Call(Line().List(append(children, Line())...))
 		}
 
 		return el, nil
 	}
 
-	return crawler(doc)
+	return crawler(doc, 0)
 }
 
 func formatTag(tag string) string {
