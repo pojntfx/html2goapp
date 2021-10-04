@@ -22,7 +22,7 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 		} else if node.Type == html.ElementNode && node.DataAtom.String() != "" {
 			// Handle complex node
 			el = Qual(goAppPkg, formatTag(node.DataAtom.String())).Call()
-			if nthChild >= 2 {
+			if nthChild > 1 {
 				el = Line().Qual(goAppPkg, formatTag(node.DataAtom.String())).Call()
 			}
 
@@ -134,6 +134,7 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 		i := 0
 		for child := node.FirstChild; child != nil; child = child.NextSibling {
 			// Tags to ignore
+			// TODO: Render SVGs using `app.Raw`
 			if child.DataAtom.String() != "svg" {
 				child, err := crawler(child, i)
 				if err != nil {
@@ -141,9 +142,9 @@ func convertHTMLToStatements(doc *html.Node, goAppPkg string) (*Statement, error
 				}
 
 				children = append(children, child)
+			}
 
 				i++
-			}
 		}
 
 		if len(children) > 0 {
