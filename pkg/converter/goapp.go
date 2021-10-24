@@ -211,6 +211,14 @@ func formatKey(key string) string {
 		return "DateTime"
 	}
 
+	if key == "Tbody" {
+		return "TBody"
+	}
+
+	if key == "Fieldset" {
+		return "FieldSet"
+	}
+
 	return key
 }
 
