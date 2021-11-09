@@ -1,6 +1,6 @@
 # HTML to go-app Converter
 
-![Logo](./assets/logo-dark.png)
+![Logo](./assets/logo-readme.png)
 
 CLI and web app to convert HTML markup to [go-app.dev](https://go-app.dev/)'s syntax.
 
